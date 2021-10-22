@@ -3,6 +3,7 @@ from django.urls import reverse
 from faker import Factory
 from rest_framework import status
 
+from apps.users.models import User
 from tests.helper_requests import request_helper
 
 user_fake = Factory.create(locale='ko_KR')
@@ -29,10 +30,12 @@ def test_signup(user_context, rf):
     )
 
     assert response.status_code == status.HTTP_201_CREATED
+    assert User.objects.filter(username=data['username']).exists()
     assert response.data['username'] == data['username']
     assert response.data['name'] == data['name']
     assert response.data['phone'] == data['phone']
     assert response.data['email'] == data['email']
+    assert response.data['id']
     assert response.data['role']
     assert response.data['created_at']
     assert response.data['updated_at']

@@ -81,7 +81,7 @@ def get_oauth2_client(user):
         user_id=user.id,
         client_type=AppModel.CLIENT_CONFIDENTIAL,
         authorization_grant_type=AppModel.GRANT_PASSWORD,
-        name='app',
+        name='all',
     )
     user_pass = '{0}:{1}'.format(obj.client_id, obj.client_secret)
     return f"{base64.b64encode(user_pass.encode('utf-8')).decode('utf-8')}"

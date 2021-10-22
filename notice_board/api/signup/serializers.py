@@ -33,3 +33,15 @@ class SignupSerializer(serializers.ModelSerializer):
     def validate_password(self, value):
         value = make_password(value)
         return value
+
+    def to_representation(self, instance):
+        return {
+            'id': instance.id,
+            'username': instance.username,
+            'name': instance.name,
+            'role': instance.role,
+            'phone': instance.phone,
+            'email': instance.email,
+            'created_at': instance.created_at,
+            'updated_at': instance.updated_at
+        }
