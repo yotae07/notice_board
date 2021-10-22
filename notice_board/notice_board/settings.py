@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'oauth2_provider',
     'apps.users',
+    'apps.post',
 ]
 
 MIDDLEWARE = [
@@ -77,6 +78,7 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
     ),
+    'DEFAULT_PAGINATION_CLASS': 'api.pagination.CustomPagination',
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
         'oauth2_provider.contrib.rest_framework.TokenHasReadWriteScope'

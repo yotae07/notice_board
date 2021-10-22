@@ -19,9 +19,11 @@ from django.urls import path, include
 from rest_framework import routers
 
 from api.signup.views import SignupViewSet
+from api.post.views import PostViewSet
 
 router = routers.DefaultRouter()
 router.register(r'users', SignupViewSet, basename='users')
+router.register(r'posts', PostViewSet, basename='posts')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
