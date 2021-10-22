@@ -3,9 +3,9 @@ import json
 from datetime import timedelta
 from urllib.parse import urlencode
 
+from django.conf import settings as SETTINGS
 from django.contrib.sessions.backends.cache import SessionStore
 from django.urls import resolve
-from django.conf import settings as SETTINGS
 from django.utils import timezone
 from oauth2_provider.models import AccessToken, RefreshToken, Application, get_application_model
 from oauthlib.common import generate_token

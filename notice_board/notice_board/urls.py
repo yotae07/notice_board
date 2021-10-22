@@ -18,8 +18,8 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
 
-from api.signup.views import SignupViewSet
 from api.post.views import PostViewSet
+from api.signup.views import SignupViewSet
 
 router = routers.DefaultRouter()
 router.register(r'users', SignupViewSet, basename='users')

@@ -1,7 +1,8 @@
 from django.contrib.auth import models as auth_models
-from django.db import models
-from ..models import BaseModel
 from django.contrib.auth.models import UserManager as AuthUserManager
+from django.db import models
+
+from ..models import BaseModel
 
 
 class User(auth_models.AbstractBaseUser, BaseModel):
