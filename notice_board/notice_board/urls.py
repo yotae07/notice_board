@@ -13,11 +13,19 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf.urls import url
 from django.contrib import admin
 from django.urls import path, include
-from django.conf.urls import url
+from rest_framework import routers
+
+from api.signup.views import SignupViewSet
+
+router = routers.DefaultRouter()
+router.register(r'users', SignupViewSet, basename='users')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
 ]
+
+urlpatterns += router.urls

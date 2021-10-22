@@ -21,11 +21,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-d120j%l=p#a*)m$^61+zf9pv9zypqx%kuf@+)h8cesvz5u9vv@'
+CLIENT_ID = 'iyrhg3yfMlcwmKET2G2zvGGcYnoRtaA1bvFpSQf4'
+CLIENT_SECRET = 'ruNJqhSpuutJhlAE1E7hNvrUtdMkiwDMHbse8LnZR2aZyBreDBgAWAGeU4YnSB4WPG3fWfu3WnZlULpxxDt3l2Yl7Uz3jGR9tr2aNqj3YVcW68RY4s5Kwi3K9aHF2FTE'
+AUTH_USER_MODEL = 'users.User'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -38,7 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'oauth2_provider'
+    'oauth2_provider',
+    'apps.users',
 ]
 
 MIDDLEWARE = [
