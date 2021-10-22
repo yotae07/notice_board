@@ -1,8 +1,8 @@
 import factory
 from faker import Factory
 
-from apps.users.models import User
 from apps.post.models import Post
+from apps.users.models import User
 
 user_fake = Factory.create(locale="ko_KR")
 
