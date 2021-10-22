@@ -24,6 +24,69 @@ WEB_HEADERS = {
 }
 
 
+def get_oauth2_client_key():
+    client_id = SETTINGS.CLIENT_ID
+    client_secret = SETTINGS.CLIENT_SECRET
+    options = {
+        'client_id': client_id,
+        'name': 'web',
+        'client_secret': client_secret
+    }
+    res = Application.objects.filter(**options)
+    if len(res) != 0:
+        application = res[0]
+        return application
+
+    application, _ = Application.objects.get_or_create(
+        client_type=Application.CLIENT_CONFIDENTIAL,
+        authorization_grant_type=Application.GRANT_PASSWORD,
+        name='web',
+        client_id=client_id,
+        client_secret=client_secret
+    )
+
+    return application
+
+
+def get_oauth2_token(user):
+    application = get_oauth2_client_key()
+    expires = timezone.now() + timedelta(seconds=36000)
+
+    access_token = AccessToken.objects.create(
+        scope='read write groups',
+        application_id=application.id,
+        user_id=user.id,
+        expires=expires,
+        token=generate_token()
+    )
+
+    refresh_token = RefreshToken.objects.create(
+        token=generate_token(),
+        application_id=application.id,
+        user_id=user.id,
+        access_token=access_token
+    )
+
+    token = {
+        'access_token': access_token.token,
+        'refresh_token': refresh_token.token
+    }
+
+    return token
+
+
+def get_oauth2_client(user):
+    AppModel = get_application_model()
+    obj, created = AppModel.objects.get_or_create(
+        user_id=user.id,
+        client_type=AppModel.CLIENT_CONFIDENTIAL,
+        authorization_grant_type=AppModel.GRANT_PASSWORD,
+        name='app',
+    )
+    user_pass = '{0}:{1}'.format(obj.client_id, obj.client_secret)
+    return f"{base64.b64encode(user_pass.encode('utf-8')).decode('utf-8')}"
+
+
 def request_helper(rf, url, method, data='', get=None, token=None, user=None, basic=False, **kwargs):
     method = method.lower()
     caller = getattr(rf, method)
