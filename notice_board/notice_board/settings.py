@@ -83,6 +83,7 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated',
         'oauth2_provider.contrib.rest_framework.TokenHasReadWriteScope'
     ],
+    'EXCEPTION_HANDLER': 'api.utils.extended_exception_handler',
 }
 
 WSGI_APPLICATION = 'notice_board.wsgi.application'
