@@ -5,6 +5,12 @@ from django.db import models
 from ..models import BaseModel
 
 
+class CustomUserManager(AuthUserManager):
+
+    def create_superuser(self, username, email=None, password=None, **extra_fields):
+        return self._create_user(username, email, password, **extra_fields)
+
+
 class User(auth_models.AbstractBaseUser, BaseModel):
     ADMIN, GENERAL, MANAGER = ('admin', 'general', 'manager')
     USER_TYPE_CHOICES = (
@@ -20,7 +26,7 @@ class User(auth_models.AbstractBaseUser, BaseModel):
     email = models.EmailField(verbose_name='email', max_length=100, db_index=True)
 
     USERNAME_FIELD = 'username'
-    objects = AuthUserManager()
+    objects = CustomUserManager()
 
     class Meta:
         verbose_name = 'user'
@@ -31,3 +37,17 @@ class User(auth_models.AbstractBaseUser, BaseModel):
     @property
     def join_at(self):
         return f'{self.created_at:%Y-%m-%d} 00:00:00.000Z'
+
+    @property
+    def is_staff(self):
+        return True
+
+    @property
+    def is_superuser(self):
+        return True
+
+    def has_module_perms(self, app_label):
+        return True
+
+    def has_perm(self, perm, obj=None):
+        return True
