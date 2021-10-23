@@ -17,7 +17,7 @@ name=아무거나, client type=confidential, authorizaion grant type=resource ow
 endpoint
 ```
 signup
-curl -i POST -H "Authorization:Bearer {로그인시 받은 토큰}" -H "Content-Type: application/json" -d '{"username":"{username}"}", "name":"{name}", "phone":"{phone}", "email":"{email}", "password":"{passowrd}"}' http://localhost:8000/users/
+curl -i POST -H "Content-Type: application/json" -d '{"username":"{username}"}", "name":"{name}", "phone":"{phone}", "email":"{email}", "password":"{passowrd}"}' http://localhost:8000/users/
 
 request
 - username: str, 5~32, 영어, 숫자, _, .만 가능 띄어쓰기 불가, 중복불가
