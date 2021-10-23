@@ -11,7 +11,7 @@ python manage.py createsuperuser로 슈퍼 유저 생성후
 localhost:8000/o/applications/ 접속 후
 name=아무거나, client type=confidential, authorizaion grant type=resource owner password-based 입력 후 저장
 발급 받은 client_id, client_secret를 settings 파일안 CLIENT_ID, CLIENT_SECRET에 복사 붙여넣기
-테스트코드 실행: manage.pt가 있는 곳에서 pytest
+테스트코드 실행: manage.py가 있는 곳에서 pytest
 ```
 
 endpoint
